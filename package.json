@@ -1,0 +1,14 @@
+{
+  "name": "stickify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stickify – convert, manage and create stickers across messaging platforms",
+  "scripts": {
+    "setup": "npm install --prefix server && npm install --prefix web",
+    "dev": "npm run dev --prefix server & npm run dev --prefix web & wait",
+    "build": "npm run build --prefix server && npm run build --prefix web",
+    "start": "npm start --prefix server",
+    "test": "npm test --prefix server",
+    "typecheck": "npm run typecheck --prefix server && npm run typecheck --prefix web"
+  }
+}

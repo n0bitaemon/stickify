@@ -1,0 +1,28 @@
+# Everything: docker compose up --build  →  http://localhost:4000
+# Just MongoDB for local development: docker compose up -d mongo
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    ports:
+      - '4000:4000'
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/stickify
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+    volumes:
+      - stickify-data:/data
+
+volumes:
+  mongo-data:
+  stickify-data:
